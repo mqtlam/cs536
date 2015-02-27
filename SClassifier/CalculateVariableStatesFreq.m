@@ -1,5 +1,12 @@
 function [ fUV ] = CalculateVariableStatesFreq( nStates, nVar, samples )
-%   Detailed explanation goes here
+% Compute the frequency of all possible states of pairwise variables
+% Parameters:
+%   - nStates : # discrete states/values of a variable
+%   - nVar    : # variables/nodes
+%   - samples : training data
+% Output:
+%   - fUV     : pairwise variable frequency of all possible states
+
     nUV = zeros(nStates, nStates, nVar, nVar);
     fUV = zeros(nStates, nStates, nVar, nVar);
     

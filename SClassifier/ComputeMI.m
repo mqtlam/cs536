@@ -1,6 +1,12 @@
 function [ mi ] = ComputeMI( i, j, fUV )
-%   Calculate Mutual Information between Node i and Node j
-%   According to the MI estimation form from the Chow-Liu slides.
+% Calculate Mutual Information between Node i and Node j
+% According to the MI estimation form from the Chow-Liu slides.
+% Parameters:
+%   - {i,j} : Index of the variables
+%   - fUV   : pairwise variable frequency of all possible states
+% Output:
+%   - mi    : Mutual Information between variable i and i
+
     nStates = size(fUV,1);
     mi = 0;
     sumRow = sum(fUV(:, :, i, j), 2);
