@@ -1,5 +1,7 @@
 function [ fUV ] = CalculateVariableStatesFreq( nStates, nVar, samples )
 % Compute the frequency of all possible states of pairwise variables
+% (i.e., probability of co-occurance of states of a pair of variables
+% for all pairs)
 % Parameters:
 %   - nStates : # discrete states/values of a variable
 %   - nVar    : # variables/nodes
