@@ -22,14 +22,14 @@ testScenes = GetAllScenes(testList);
 
 %% DEMO 1: BASELINE MARGINAL INDEPENDENCE
 % train
-[edgeStructs, nodePots, edgePots] = TrainIndependent(foundTrainObjectsList, trainScenes, objectsVocab);
+[edgeStructs1, nodePots1, edgePots1] = TrainIndependent(foundTrainObjectsList, trainScenes, objectsVocab);
 
 % inference
-[probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
+[probs1, scenes1, bestScene1] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs1, nodePots1, edgePots1)
 
-% %% DEMO 2: CHOW-LIU TREE TODO
-% % train
-% [edgeStructs, nodePots, edgePots] = TrainChowLiu(foundTrainObjectsList, trainScenes, objectsVocab);
-% 
-% % inference
-% [probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
+%% DEMO 2: CHOW-LIU TREE
+% train
+[edgeStructs2, nodePots2, edgePots2] = TrainChowLiu(foundTrainObjectsList, trainScenes, objectsVocab);
+
+% inference
+[probs2, scenes2, bestScene2] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs2, nodePots2, edgePots2)

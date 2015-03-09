@@ -39,6 +39,7 @@ for s = keys(scenes)
     
     %% preprocess
     samples = PreprocessData(foundTrainObjectsList, objectsVocab);
+    % TODO: use scene information
     
     %% compute mutual information
     fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
@@ -50,17 +51,15 @@ for s = keys(scenes)
     %% construct data structures for UGM:
     
     %% construct edge struct
-    edgeStruct = UGM_makeEdgeStruct(zeros(nNodes, nNodes), nStates);
-    % TODO: use Aff to construct graph
+    edgeStruct = UGM_makeEdgeStruct(Aff, nStates);
     
     %% construct node potential
     % 1 = present, 2 = absent
-    nodePot = PRIOR*ones(nNodes, nStates);
-    % TODO: set to some dummy values?
+    nodePot = ones(nNodes, nStates);
     
     %% construct edge potentials
-    edgePot = zeros(nStates, nStates, edgeStruct.nEdges);
-    % TODO: use frequency information to set edge potentials
+    edgePot = GetEdgePot(edgeStruct, fUV, nStates);
+    edgePot = edgePot + PRIOR;
     
     %% update
     edgeStructs(scene) = edgeStruct;
