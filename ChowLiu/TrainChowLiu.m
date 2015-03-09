@@ -38,8 +38,12 @@ for s = keys(scenes)
     scene = s{1};
     
     %% preprocess
-    samples = PreprocessData(foundTrainObjectsList, objectsVocab);
-    % TODO: use scene information
+    examples = scenes(scene);
+    foundObjectsList = cell(length(examples), 1);
+    for ex = 1:length(examples)
+        foundObjectsList{ex} = foundTrainObjectsList{examples(ex)};
+    end
+    samples = PreprocessData(foundObjectsList, objectsVocab);
     
     %% compute mutual information
     fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
