@@ -1,0 +1,3 @@
+bedroom
+kitchen
+bathroom

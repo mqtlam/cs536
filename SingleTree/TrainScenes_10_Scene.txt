@@ -1,0 +1,10 @@
+bedroom
+kitchen
+bathroom
+skyscraper
+dining_room
+street
+highway
+mountain_snowy
+building_facade
+living_room

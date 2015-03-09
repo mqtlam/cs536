@@ -21,7 +21,7 @@ function [ mi ] = ComputeMI( i, j, fUV )
             if(den ~= 0 && num ~= 0)
                 logProd = log(fUV(u, v, i ,j)/den);
             else
-                fprintf('\nu=%i, v=%i, i=%i, j=%i', u, v, i, j);
+                %fprintf('\nu=%i, v=%i, i=%i, j=%i', u, v, i, j);
             end
             
             mi = mi + fUV(u, v, i, j) * logProd;
