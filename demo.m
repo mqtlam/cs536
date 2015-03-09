@@ -21,5 +21,9 @@ trainScenes = GetAllScenes(trainList);
 testScenes = GetAllScenes(testList);
 
 %% DEMO 1: BASELINE MARGINAL INDEPENDENCE
+% train
 [edgeStructs, nodePots, edgePots] = TrainIndependent(foundTrainObjectsList, trainScenes, objectsVocab);
+
+% inference
+[probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
 
