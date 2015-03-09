@@ -1,16 +1,35 @@
 %% simple demo
 
-%% setup paths
-setup;
+%% --- setup
+clearvars; % clear workspace
+setup; % set up paths
 
 %% --- parse annotations
 
 %% get object counts
 datasetPath = 'K:/Datasets/SUNDataset/SUN2012'; % change this
-[foundObjectsList, trainList] = ParseSUNAnnotations('Data/TrainList.txt', datasetPath);
+[foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/SmallTrainList.txt', datasetPath);
+[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/SmallTestList.txt', datasetPath);
 
-%% get all object class names found during the parsing (smaller vocabulary)
-foundObjectsVocab = GetFoundObjects(foundObjectsList);
+%% get all object class names found during the parsing (vocabulary)
+trainObjectsVocab = GetFoundObjects(foundTrainObjectsList);
+testObjectsVocab = GetFoundObjects(foundTestObjectsList);
+objectsVocab = union(trainObjectsVocab, testObjectsVocab);
 
-%% get all possible object class names in the entire dataset
-objectsVocab = GetAllObjects('Data/AllObjectsList.txt');
+%% get scenes
+trainScenes = GetAllScenes(trainList);
+testScenes = GetAllScenes(testList);
+
+%% DEMO 1: BASELINE MARGINAL INDEPENDENCE
+% train
+[edgeStructs, nodePots, edgePots] = TrainIndependent(foundTrainObjectsList, trainScenes, objectsVocab);
+
+% inference
+[probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
+
+% %% DEMO 2: CHOW-LIU TREE TODO
+% % train
+% [edgeStructs, nodePots, edgePots] = TrainChowLiu(foundTrainObjectsList, trainScenes, objectsVocab);
+% 
+% % inference
+% [probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
