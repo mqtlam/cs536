@@ -13,9 +13,11 @@ function [ vectorizedData ] = PreprocessData( objectsList, objectsVocab )
     vectorizedData = zeros(nVocab, nSamples);
     for i=1:nSamples
        for v=1:nVocab
-            % Present = 1; Absent  = 0
+            % Present = 1; Absent  = 2
             if(isKey(objectsList{i},objectsVocab(v)))
                 vectorizedData(v,i) = 1;
+            else
+                vectorizedData(v,i) = 2;
             end
        end        
     end          
