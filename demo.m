@@ -27,3 +27,9 @@ testScenes = GetAllScenes(testList);
 % inference
 [probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
 
+% %% DEMO 2: CHOW-LIU TREE TODO
+% % train
+% [edgeStructs, nodePots, edgePots] = TrainChowLiu(foundTrainObjectsList, trainScenes, objectsVocab);
+% 
+% % inference
+% [probs, scenes, bestScene] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs, nodePots, edgePots)
