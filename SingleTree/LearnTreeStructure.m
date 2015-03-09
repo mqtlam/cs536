@@ -29,7 +29,7 @@ function [nodePotMap,edgePotMap,edgeStructMap] = LearnTreeStructure(foundObjects
         sceneClass = sceneList{i};
         objIdxEnd = sceneIdxMap(sceneClass);
         idx = 1;
-        %tempObjectsList = containers.Map;
+        tempObjectsList = cell(objIdxEnd - objIdxStart + 1, 1);
         while(objIdxStart <= objIdxEnd)
             % Get objectsList corresponding to the current scene class
             tempObjectsList{idx,1} = foundObjectsList{objIdxStart};
