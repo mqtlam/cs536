@@ -70,6 +70,9 @@ for s = keys(scenes)
     
     %% construct empty edge potentials
     edgePot = zeros(nStates, nStates, edgeStruct.nEdges);
+    for e = 1:edgeStruct.nEdges
+       edgePot(:, :, e) = ones(nStates, nStates); 
+    end
     
     %% normalize (technically optional but very useful here)
     for index = 1:nNodes

@@ -56,9 +56,19 @@ for s = scenes
 
     %% compute probability
     prob = 0;
+    
+    % over nodes
     for i = 1:nNodes
-       prob = prob + log(nodePot(i, configuration(i)));
+        prob = prob + log(nodePot(i, configuration(i)));
     end
+    
+    % over edges
+    for e = 1:edgeStruct.nEdges 
+        edgeEnds = edgeStruct.edgeEnds(e,:);
+        prob = prob + log(edgePot(configuration(edgeEnds(1)), ...
+            configuration(edgeEnds(2)), e));
+    end
+    
     prob = prob - logZ;
     prob = exp(prob);
 
