@@ -1,6 +1,4 @@
-% Test
-% 1. Preprocess Data to obtain vectorized data
-% 2. Compute Node Potential
+% Test Preprocess Data to obtain vectorized data and compute Node Potential
 
 % Preprocess Data
 vData = PreprocessData(foundObjectsList, foundObjectsVocab);

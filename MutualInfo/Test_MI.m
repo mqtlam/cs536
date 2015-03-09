@@ -46,4 +46,4 @@ for i=1:nVar
 end
 
 miXY = miXY + miXY';
-disp(miXY);
+miXY
