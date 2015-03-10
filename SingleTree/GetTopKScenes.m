@@ -5,7 +5,7 @@ function [ scenePathMap ] = GetTopKScenes( dataSetPath, K )
 %   - K             : top K scenes
  %% Read all folders in dataset annotation folder
     sceneMap = containers.Map('KeyType', 'char', 'ValueType', 'int32');
-    scenePathMap = containers.Map('KeyType', 'char', 'KeyType', 'char');
+    scenePathMap = containers.Map('KeyType', 'char', 'ValueType', 'char');
     scene = containers.Map('KeyType', 'int32', 'ValueType', 'char');
     foldersList = dir(fullfile(dataSetPath, '\*'));
     % Only folders in directory

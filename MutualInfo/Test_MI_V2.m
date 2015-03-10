@@ -1,5 +1,5 @@
 % Test: Mutual Information
-clear all
+clear
 clc
 % Simulate m samples with n variables
 % m = 20
@@ -8,7 +8,7 @@ clc
 % Present   = 1
 % Absent    = 0;
 
-samples = randi([0,1], 10, 300);
+samples = randi([1,2], 10, 300);
 
 % Number of variables
 nVar = size(samples, 1);
@@ -18,4 +18,4 @@ nStates = 2;
 
 fUV = CalculateVariableStatesFreq(nStates, nVar, samples);
 miXY = CalculateMutualInfoMatrix(fUV, nVar);
-miXY
+disp(miXY);

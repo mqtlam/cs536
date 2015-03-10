@@ -5,7 +5,7 @@ function [ mi ] = ComputeMI( i, j, fUV )
 %   - {i,j} : Index of the variables
 %   - fUV   : pairwise variable frequency of all possible states
 % Output:
-%   - mi    : Mutual Information between variable i and i
+%   - mi    : Mutual Information between variable i and j
 
     nStates = size(fUV,1);
     mi = 0;
