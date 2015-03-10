@@ -7,7 +7,7 @@ setup; % set up paths
 %% --- parse annotations
 
 %% get object counts
-datasetPath = 'K:/Datasets/SUNDataset/SUN2012'; % change this
+datasetPath = 'Data'; % change this
 [foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/SmallTrainList.txt', datasetPath);
 [foundTestObjectsList, testList] = ParseSUNAnnotations('Data/SmallTestList.txt', datasetPath);
 
