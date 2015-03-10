@@ -33,3 +33,7 @@ testScenes = GetAllScenes(testList);
 
 % inference
 [probs2, scenes2, bestScene2] = Inference(foundTestObjectsList{1}, objectsVocab, edgeStructs2, nodePots2, edgePots2)
+
+% draw graph demo
+object_to_draw = 'abbey';
+DrawGraph(edgeStructs2(object_to_draw), nodePots2(object_to_draw), edgePots2(object_to_draw), objectsVocab, 'draw_nodepot', 1, 'draw_edgepot', 1);
