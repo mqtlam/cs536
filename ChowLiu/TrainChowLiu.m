@@ -65,6 +65,14 @@ for s = keys(scenes)
     edgePot = GetEdgePot(edgeStruct, fUV, nStates);
     edgePot = edgePot + PRIOR;
     
+    %% (optional: normalize)
+    for index = 1:nNodes
+        nodePot(index, :) = nodePot(index, :)./sum(nodePot(index, :));
+    end
+    for e = 1:edgeStruct.nEdges
+       edgePot(:, :, e) =  edgePot(:, :, e)./sum(sum(edgePot(:, :, e)));
+    end
+    
     %% update
     edgeStructs(scene) = edgeStruct;
     nodePots(scene) = nodePot;

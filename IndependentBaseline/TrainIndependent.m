@@ -74,9 +74,12 @@ for s = keys(scenes)
        edgePot(:, :, e) = ones(nStates, nStates); 
     end
     
-    %% normalize (technically optional but very useful here)
+    %% (optional: normalize)
     for index = 1:nNodes
         nodePot(index, :) = nodePot(index, :)./sum(nodePot(index, :));
+    end
+    for e = 1:edgeStruct.nEdges
+       edgePot(:, :, e) =  edgePot(:, :, e)./sum(sum(edgePot(:, :, e)));
     end
     
     %% update
