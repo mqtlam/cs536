@@ -1,4 +1,4 @@
-function [ probs, scenes, bestScene ] = Inference( foundObjects, objectsVocab, edgeStructs, nodePots, edgePots)
+function [ probs, scenes, bestScene ] = Inference( foundObjects, objectsVocab, edgeStructs, nodePots, edgePots, logZs)
 %INFERENCE Perform inference by finding the scene that maximizes probability.
 %   foundObjects:   list of object counts
 %                           Each cell is a containers.Map
@@ -11,6 +11,7 @@ function [ probs, scenes, bestScene ] = Inference( foundObjects, objectsVocab, e
 %                               node potentials (UGM)
 %   edgePots:               map where keys are scenes and values are 
 %                               edge potentials (UGM)
+%   logZs:          pre-computed partition functions per scene
 %   probs:          probabilities for each scene
 %   scenes:         list of scenes (in order for probs)
 %   bestScene:      scene with maximum probability
@@ -34,7 +35,11 @@ for s = scenes
     edgeStruct = edgeStructs(scene);
 
     %% compute partition function
-    [~, ~, logZ] = UGM_Infer_Tree(nodePot,edgePot,edgeStruct);
+    if nargin < 6
+        [~, ~, logZ] = UGM_Infer_Tree(nodePot,edgePot,edgeStruct);
+    else
+        logZ = logZs(scene);
+    end
 
     %% compute configuration
     configuration = zeros(nNodes, 1);
