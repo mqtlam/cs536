@@ -1,4 +1,4 @@
-function [ edgeStructs, nodePots, edgePots ] = TrainMixTrees( foundTrainObjectsList, scenes, objectsVocab )
+function [ edgeStructs, nodePots, edgePots ] = TrainMixTrees( foundTrainObjectsList, trainScenes, objectsVocab )
 %TRAINMIXTREE Train graphical model of mixture of Chow-Liu trees.
 %
 %   Each object node comes from counting presence/absence in images.
@@ -33,7 +33,7 @@ for i = 1:length(objectsVocab)
 end
 
 %% loop through scenes
-for s = keys(scenes)
+for s = keys(trainScenes)
     scene = s{1};
 
     %% Initialize the MT model
@@ -44,7 +44,7 @@ for s = keys(scenes)
 
     %% randomly initialize the tree components
     % preprocess
-    examples = scenes(scene);
+    examples = trainScenes(scene);
     foundObjectsList = cell(length(examples), 1);
     for ex = 1:length(examples)
         foundObjectsList{ex} = foundTrainObjectsList{examples(ex)};
@@ -54,7 +54,7 @@ for s = keys(scenes)
     fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
     
     % Generate the Initial Mixture trees
-    [MT_edgeStructs,MT_nodePots,MT_edgePots] = GenerateInitMI( nNodes, nStates, m, fUV, 1);
+    [MT_edgeStructs,MT_nodePots,MT_edgePots] = GenerateInitMT( nNodes, nStates, m, fUV, 1);
 
     %% Start the EM iterations
     for it = 1:1:maxIter
