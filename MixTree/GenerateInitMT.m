@@ -48,7 +48,7 @@ end
 %% Option #2: Randomize the data and pick 30% of data for each tree
 if(option == 2)
     N = size(samples,2);
-    n = int64(N * 0.3);
+    n = int64(N/K);
     for k=1:K
         randOrder = randperm(N);
         indeces = randOrder(1:n);

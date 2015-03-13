@@ -1,4 +1,4 @@
-function [ edgeStructs, nodePots, edgePots ] = TrainMixTrees( foundTrainObjectsList, trainScenes, objectsVocab )
+function [ edgeStructs, nodePots, edgePots, mCoeffs ] = TrainMixTrees( foundTrainObjectsList, trainScenes, objectsVocab, K )
 %TRAINMIXTREE Train graphical model of mixture of Chow-Liu trees.
 %
 %   Each object node comes from counting presence/absence in images.
@@ -15,12 +15,15 @@ function [ edgeStructs, nodePots, edgePots ] = TrainMixTrees( foundTrainObjectsL
 %                               node potentials (UGM)
 %   edgePots:               map where keys are scenes and values are 
 %                               edge potentials (UGM)
-%
+%   mCoeffs:                map where keys are scenes and values are 
+%                               mixture coeffients(UGM) of the trees
+%   K:                      # of trees to learn for each scene
 
 %% initialization
 edgeStructs = containers.Map;
 nodePots = containers.Map;
 edgePots = containers.Map;
+mCoeffs = containers.Map;
 
 nNodes = length(objectsVocab);
 nStates = 2;
@@ -37,8 +40,6 @@ for s = keys(trainScenes)
     scene = s{1};
 
     %% Initialize the MT model
-    % m is the # of mixture trees want to learn
-    K = 2;
     MT_lambda = ones(K,1);
     MT_lambda = MT_lambda/sum(MT_lambda); % initial lambda has uniform probability
 
@@ -75,6 +76,7 @@ for s = keys(trainScenes)
     edgeStructs(scene) = MT_edgeStructs;
     nodePots(scene) = MT_nodePots;
     edgePots(scene) = MT_edgePots;
+    mCoeffs(scene) = MT_lambda;
 end
 
 end
