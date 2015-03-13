@@ -51,7 +51,7 @@ for s = keys(trainScenes)
     end
     samples = PreprocessData(foundObjectsList, objectsVocab);
     
-    N = size(samples);
+    N = size(samples,2);
     
     fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
     
