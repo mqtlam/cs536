@@ -45,7 +45,6 @@ function [nodePotMap,edgePotMap,edgeStructMap] = LearnTreeStructure(foundObjects
 
         % Compute Mutual Information
         miXY = CalculateMutualInfoMatrix(fUV, nVars);
-        disp(miXY);
 
         % Construct maximum spanning tree
         adjMat = MaxSpan(miXY);

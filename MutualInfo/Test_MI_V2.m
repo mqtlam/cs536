@@ -17,5 +17,6 @@ nVar = size(samples, 1);
 nStates = 2;
 
 fUV = CalculateVariableStatesFreq(nStates, nVar, samples);
+disp(fUV);
 miXY = CalculateMutualInfoMatrix(fUV, nVar);
 disp(miXY);

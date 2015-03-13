@@ -51,28 +51,25 @@ for s = keys(trainScenes)
     end
     samples = PreprocessData(foundObjectsList, objectsVocab);
     
+    N = size(samples);
+    
     fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
     
     % Generate the Initial Mixture trees
-    [MT_edgeStructs,MT_nodePots,MT_edgePots] = GenerateInitMT( nNodes, nStates, m, fUV, 1);
+    [MT_edgeStructs, MT_nodePots, MT_edgePots] = GenerateInitMT( nNodes, nStates, m, fUV, 1);
 
     %% Start the EM iterations
-    for it = 1:1:maxIter
-        % E step
-        %--------------
-        % Compute 'gamma', 'P' here
-        %--------------
-        % M step
-        for ik = 1:1:m
-            %--------------
-            % Compute 'lambda' here
-            %--------------
-            
-            % Pk = P(ik,:);
+    for it = 1:maxIter
+        %% E step
+        [P, uGamma] = EStep(MT_edgeStructs, MT_nodePots, MT_edgePots, MT_lambda, samples, m);
+        %% M step
+        for ik = 1:m
+            MT_lambda(ik) = uGamma(ik)/ N;            
+            Pk = P(ik,:);
             [edgeStruct, nodePot, edgePot] = MTChowLiuTree(Pk ,samples);
-            MT_edgeStructs{ik,1} = edgeStruct;
-            MT_nodePots{ik,1} = nodePot;
-            MT_edgePots{ik,1} = edgePot;
+            MT_edgeStructs(ik) = edgeStruct;
+            MT_nodePots(ik) = nodePot;
+            MT_edgePots(ik) = edgePot;
         end
     end
     

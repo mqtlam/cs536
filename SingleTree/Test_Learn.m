@@ -12,4 +12,7 @@ scenePathMap = GetScenePathMap(datasetPath);
 [nodePotMap,edgePotMap,edgeStructMap] = LearnTreeStructure(foundObjectsVocab, foundObjectsList, sceneIdxMap, sceneList);
 
 % Test: How to do inference??
+% draw graph demo
+object_to_draw = 'bedroom';
+DrawGraph(edgeStructMap(object_to_draw), nodePotMap(object_to_draw), edgePotMap(object_to_draw), foundObjectsVocab, 'draw_nodepot', 1, 'draw_edgepot', 1);
 
