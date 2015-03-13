@@ -38,8 +38,8 @@ for s = keys(trainScenes)
 
     %% Initialize the MT model
     % m is the # of mixture trees want to learn
-    m = 2;
-    MT_lambda = ones(m,1);
+    K = 2;
+    MT_lambda = ones(K,1);
     MT_lambda = MT_lambda/sum(MT_lambda); % initial lambda has uniform probability
 
     %% randomly initialize the tree components
@@ -51,25 +51,23 @@ for s = keys(trainScenes)
     end
     samples = PreprocessData(foundObjectsList, objectsVocab);
     
-    N = size(samples,2);
-    
-    fUV = CalculateVariableStatesFreq(nStates, nNodes, samples);
-    
+    N = size(samples,2);    
+   
     % Generate the Initial Mixture trees
-    [MT_edgeStructs, MT_nodePots, MT_edgePots] = GenerateInitMT( nNodes, nStates, m, fUV, 1);
+    [MT_edgeStructs, MT_nodePots, MT_edgePots] = GenerateInitMT( nNodes, nStates, K, samples, 2);
 
     %% Start the EM iterations
     for it = 1:maxIter
         %% E step
-        [P, uGamma] = EStep(MT_edgeStructs, MT_nodePots, MT_edgePots, MT_lambda, samples, m);
+        [P, uGamma] = EStep(MT_edgeStructs, MT_nodePots, MT_edgePots, MT_lambda, samples, K);
         %% M step
-        for ik = 1:m
-            MT_lambda(ik) = uGamma(ik)/ N;            
-            Pk = P(ik,:);
+        for k= 1:K
+            MT_lambda(k) = uGamma(k)/ N;            
+            Pk = P(:,k)';
             [edgeStruct, nodePot, edgePot] = MTChowLiuTree(Pk ,samples);
-            MT_edgeStructs(ik) = edgeStruct;
-            MT_nodePots(ik) = nodePot;
-            MT_edgePots(ik) = edgePot;
+            MT_edgeStructs{k,1} = edgeStruct;
+            MT_nodePots{k,1} = nodePot;
+            MT_edgePots{k,1} = edgePot;
         end
     end
     

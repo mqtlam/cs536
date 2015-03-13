@@ -22,8 +22,8 @@ function [ P, uGamma ] = EStep( edgeStructs, nodePots, edgePots, lambdas, D, K )
     
     for i=1:N
         for k=1:K
-            lGamma(i,k) = lambdas(k) * ComputeJointProbability(edgeStructs(k), ...
-                nodePots(k), edgePots(k), D(:,i), nNodes, logZs(k));
+            lGamma(i,k) = lambdas(k) * ComputeJointProbability(edgeStructs{k,1}, ...
+                nodePots{k,1}, edgePots{k,1}, D(:,i), nNodes, logZs{k,1});
         end
         % Normalize lGamma
         lGamma(i,:) = lGamma(i,:)/sum(lGamma(i,:));
@@ -37,7 +37,7 @@ function [ P, uGamma ] = EStep( edgeStructs, nodePots, edgePots, lambdas, D, K )
     P = zeros(N,K);
     for k=1:K
         for i=1:N
-            P(i,k) = lgamma(i,k) / uGamma(k);
+            P(i,k) = lGamma(i,k) / uGamma(k);
         end
     end
     
