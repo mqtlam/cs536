@@ -26,13 +26,18 @@ end
 
 %% DEMO 1: BASELINE MARGINAL INDEPENDENCE
 %% training
-fprintf('training (marginal independence)...\n');
+trainTic = tic;
+fprintf('training (marginal independence)... ');
 [edgeStructs1, nodePots1, edgePots1] = TrainIndependent(foundTrainObjectsList, trainScenes, objectsVocab);
+fprintf('(%fs)\n', toc(trainTic));
 
 %% inference on all test images
 bestScenes1 = cell(length(foundTestObjectsList), 1);
 hamming1 = zeros(length(foundTestObjectsList), 1);
+zTic = tic;
+fprintf('computing logZ (marginal independence)... ');
 logZs1 = ComputePartitionFunctions(edgeStructs1, nodePots1, edgePots1);
+fprintf('(%fs)\n', toc(zTic));
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (marginal independence) on image %d... ', i);
@@ -47,13 +52,18 @@ fprintf('accuracy (marginal independence)=%f\n', sum(hamming1)/numel(hamming1));
 
 %% DEMO 2: CHOW-LIU TREE
 %% training
-fprintf('training (chow-liu tree)...\n');
+trainTic = tic;
+fprintf('training (chow-liu tree)... ');
 [edgeStructs2, nodePots2, edgePots2] = TrainChowLiu(foundTrainObjectsList, trainScenes, objectsVocab);
+fprintf('(%fs)\n', toc(trainTic));
 
 %% inference on all test images
 bestScenes2 = cell(length(foundTestObjectsList), 1);
 hamming2 = zeros(length(foundTestObjectsList), 1);
+zTic = tic;
+fprintf('computing logZ (chow-liu tree)... ');
 logZs2 = ComputePartitionFunctions(edgeStructs2, nodePots2, edgePots2);
+fprintf('(%fs)\n', toc(zTic));
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (chow-liu tree) on image %d... ', i);
