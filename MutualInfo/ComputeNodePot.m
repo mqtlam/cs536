@@ -24,8 +24,8 @@ function [ nodePot ] = ComputeNodePot( objectsList, objectsVocab )
             end            
         end
         if(count ~= 0)
-            nodePot(v,2) = count/nSamples;
-            nodePot(v,1) = 1 - nodePot(v,2);
+            nodePot(v,1) = count/nSamples;
+            nodePot(v,2) = 1 - nodePot(v,2);
         end
     end      
 end
