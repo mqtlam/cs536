@@ -8,8 +8,8 @@ setup; % set up paths
 
 %% get object counts
 datasetPath = 'Data'; % change this
-[foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/MediumTrainList.txt', datasetPath);
-[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MediumTestList.txt', datasetPath);
+[foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/MT_trainlist.txt', datasetPath);
+[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MT_testlist.txt', datasetPath);
 
 %% get all object class names found during the parsing (vocabulary)
 trainObjectsVocab = GetFoundObjects(foundTrainObjectsList);

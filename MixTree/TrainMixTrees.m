@@ -59,9 +59,21 @@ for s = keys(trainScenes)
     %% Start the EM iterations
     for it = 1:1:maxIter
         % E step
-    
+        %--------------
+        % Compute 'gamma', 'P' here
+        %--------------
         % M step
-        
+        for ik = 1:1:m
+            %--------------
+            % Compute 'lambda' here
+            %--------------
+            
+            % Pk = P(ik,:);
+            [edgeStruct, nodePot, edgePot] = MTChowLiuTree(Pk ,samples);
+            MT_edgeStructs{ik,1} = edgeStruct;
+            MT_nodePots{ik,1} = nodePot;
+            MT_edgePots{ik,1} = edgePot;
+        end
     end
     
     %% updates    
