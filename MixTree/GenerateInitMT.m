@@ -4,8 +4,10 @@ function [MT_edgeStructs,MT_nodePots,MT_edgePots] = GenerateInitMT( nNodes, nSta
 %           m      -> # of mixture trees
 %           fUV    -> pairwise frequency over all nodes
 %           option -> 1. generate the MI mat, then shuffle rows and cols
-%                     2. split the scene instances into groups, then build tree seperately
-% Output:   miXY_shuffled -> m*1 cell array stores the MI mat of 'm' trees
+%                     2. split the scene instances into 'm' groups, then build tree seperately
+% Output:   MT_edgeStructs -> m*1 cell array stores structures of 'm' trees
+%           MT_nodePots    -> m*1 cell array stores node potential of 'm' trees
+%           MT_edgePots    -> m*1 cell array stores edge potentail of 'm' trees
 
 MT_edgeStructs = cell(m,1);
 MT_nodePots = cell(m,1);
