@@ -27,7 +27,7 @@ mCoeffs = containers.Map;
 
 nNodes = length(objectsVocab);
 nStates = 2;
-maxIter = 20; % maximum iteration for EM 
+maxIter = 10; % maximum iteration for EM 
 
 %% for convenience: map object name to index
 objectsVocabMap = containers.Map;
@@ -38,7 +38,7 @@ end
 %% loop through scenes
 for s = keys(trainScenes)
     scene = s{1};
-
+    fprintf('\nLearning trees for scene: %s\n', K, scene);
     %% Initialize the MT model
     MT_lambda = ones(K,1);
     MT_lambda = MT_lambda/sum(MT_lambda); % initial lambda has uniform probability
