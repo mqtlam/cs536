@@ -62,7 +62,7 @@ for s = keys(trainScenes)
         %% E step
         [P, uGamma] = EStep(MT_edgeStructs, MT_nodePots, MT_edgePots, MT_lambda, samples, K);
         %% M step
-        for k= 1:K
+        parfor k= 1:K
             MT_lambda(k) = uGamma(k)/ N;            
             Pk = P(:,k)';
             [edgeStruct, nodePot, edgePot] = MTChowLiuTree(Pk ,samples);
@@ -71,12 +71,12 @@ for s = keys(trainScenes)
             MT_edgePots{k,1} = edgePot;
         end
     end
-    
     %% updates    
     edgeStructs(scene) = MT_edgeStructs;
     nodePots(scene) = MT_nodePots;
     edgePots(scene) = MT_edgePots;
     mCoeffs(scene) = MT_lambda;
+
 end
 
 end

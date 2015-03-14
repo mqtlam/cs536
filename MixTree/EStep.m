@@ -21,7 +21,7 @@ function [ P, uGamma ] = EStep( edgeStructs, nodePots, edgePots, lambdas, D, K )
     logZs = ComputeKPartitionFunctions(edgeStructs, nodePots, edgePots, K);
     
     for i=1:N
-        for k=1:K
+        parfor k=1:K
             lGamma(i,k) = lambdas(k) * ComputeJointProbability(edgeStructs{k,1}, ...
                 nodePots{k,1}, edgePots{k,1}, D(:,i), nNodes, logZs{k,1});
         end
@@ -30,21 +30,15 @@ function [ P, uGamma ] = EStep( edgeStructs, nodePots, edgePots, lambdas, D, K )
     end
    
     uGamma = zeros(1,K); 
-    for k=1:K
+    parfor k=1:K
         uGamma(k) = sum(lGamma(:,k));
     end
     
     P = zeros(N,K);
-    for k=1:K
+    parfor k=1:K
         for i=1:N
             P(i,k) = lGamma(i,k) / uGamma(k);
         end
     end
-    
-    %P = zeros(nNodes,nNodes,K);
-    %for v1=1:nNodes
-    %    for v2=v1+1:nNodes        
-    %    end
-    %end
 end
 

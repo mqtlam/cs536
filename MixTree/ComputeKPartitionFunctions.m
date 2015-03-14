@@ -5,7 +5,7 @@ function [ logZs ] = ComputeKPartitionFunctions( edgeStructs, nodePots, edgePots
 logZs = cell(K,1);
 
 %% loop through all K
-for k=1:K
+parfor k=1:K
     nodePot = nodePots{k,1};
     edgePot = edgePots{k,1};
     edgeStruct = edgeStructs{k,1};

@@ -57,7 +57,7 @@ function [ probs, scenes, bestScene ] = InferenceMT( foundObjects, objectsVocab,
         
         prob = 0;
         %% For all trees compute joint probability
-        for k=1:K
+        parfor k=1:K
             prob = prob + mCoeffs(k) * ComputeJointProbability(edgeStructs{k,1}, ...
                 nodePots{k,1}, edgePots{k,1}, configuration, nNodes, logZs{k,1});            
         end
