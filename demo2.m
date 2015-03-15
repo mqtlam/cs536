@@ -5,6 +5,9 @@ clearvars; % clear workspace
 clc
 setup; % set up paths
 
+s = RandStream('mt19937ar','Seed',1);
+RandStream.setGlobalStream(s);
+
 %% --- parse annotations
 
 %% get object counts
