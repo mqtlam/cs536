@@ -3,4 +3,9 @@
 if (isempty(gcp('nocreate')) == 0)
     delete(gcp('nocreate'));
 end
-parpool(2);
+
+N = 4;
+myCluster=parcluster('local'); 
+myCluster.NumWorkers = N;
+parpool(myCluster,N)
+%parpool(2);

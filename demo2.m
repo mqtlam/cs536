@@ -10,7 +10,7 @@ setup; % set up paths
 %% get object counts
 datasetPath = 'Data'; % change this
 [foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/MediumTrainList.txt', datasetPath);
-[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MediumTestList.txt', datasetPath);
+[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MediumTrainList.txt', datasetPath);
 
 %% get all object class names found during the parsing (vocabulary)
 trainObjectsVocab = GetFoundObjects(foundTrainObjectsList);
@@ -29,7 +29,7 @@ end
 %% training
 K = 3;
 trainTic = tic;
-fprintf('training (chow-liu tree)... ');
+fprintf('training (MT)... ');
 [edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT] = TrainMixTrees(foundTrainObjectsList, trainScenes, objectsVocab, K);
 fprintf('(%fs)\n', toc(trainTic));
 
@@ -42,7 +42,7 @@ fprintf('(%fs)\n', toc(zTic));
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (MT) on image %d... ', i);  
-    [probs, scenes, bestScene] = InferenceMT(foundTestObjectsList{i}, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K);
+    [probs, scenes, bestScene, idx] = InferenceMT(foundTestObjectsList{i}, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K);
     bestScenes3{i} = bestScene{1};
     hamming3(i) = strcmp(bestScenes3{i}, testSceneList{i});
     fprintf('correct=%d (%fs)\n', hamming3(i), toc(testTic));

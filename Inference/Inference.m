@@ -1,4 +1,4 @@
-function [ probs, scenes, bestScene ] = Inference( foundObjects, objectsVocab, edgeStructs, nodePots, edgePots, logZs)
+function [ probs, scenes, bestScene, index ] = Inference( foundObjects, objectsVocab, edgeStructs, nodePots, edgePots, logZs)
 %INFERENCE Perform inference by finding the scene that maximizes probability.
 %   foundObjects:   list of object counts
 %                           Each cell is a containers.Map

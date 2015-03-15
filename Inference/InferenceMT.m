@@ -1,4 +1,4 @@
-function [ probs, scenes, bestScene ] = InferenceMT( foundObjects, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K)
+function [ probs, scenes, bestScene, index ] = InferenceMT( foundObjects, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K)
 %INFERENCE Perform inference by finding the scene that maximizes probability.
 %   foundObjects:   list of object counts
 %                           Each cell is a containers.Map
@@ -15,6 +15,7 @@ function [ probs, scenes, bestScene ] = InferenceMT( foundObjects, objectsVocab,
 %   probs:          probabilities for each scene
 %   scenes:         list of scenes (in order for probs)
 %   bestScene:      scene with maximum probability
+%   index:            index of scene with maximum probability
 
     nNodes = length(objectsVocab);
 

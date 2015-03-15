@@ -49,7 +49,7 @@ end
 if(option == 2)
     N = size(samples,2);
     n = round(N/K);
-    for k=1:K
+    parfor k=1:K
         randOrder = randperm(N);
         indeces = randOrder(1:n);
         newSample = samples(:,indeces);
