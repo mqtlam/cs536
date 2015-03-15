@@ -13,7 +13,7 @@ PRIOR = 0.1;
 %% compute mutual information
 sparseTable = samples';
 if size(sparseTable,1) ~= length(Pk)
-    msg = 'MTChosLiuTree has wrong input!';
+    msg = 'MTChowLiuTree has wrong input!';
     error(msg);
 end
 

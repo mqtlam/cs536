@@ -9,8 +9,8 @@ setup; % set up paths
 
 %% get object counts
 datasetPath = 'Data'; % change this
-[foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/MediumTrainList.txt', datasetPath);
-[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MediumTrainList.txt', datasetPath);
+[foundTrainObjectsList, trainList] = ParseSUNAnnotations('Data/MT_trainlist_6.txt', datasetPath);
+[foundTestObjectsList, testList] = ParseSUNAnnotations('Data/MT_testlist_6.txt', datasetPath);
 
 %% get all object class names found during the parsing (vocabulary)
 trainObjectsVocab = GetFoundObjects(foundTrainObjectsList);
@@ -36,9 +36,9 @@ fprintf('(%fs)\n', toc(trainTic));
 %% inference on all test images
 bestScenes3 = cell(length(foundTestObjectsList), 1);
 hamming3 = zeros(length(foundTestObjectsList), 1);
-zTic = tic;
-fprintf('computing logZ (MT)... ');
-fprintf('(%fs)\n', toc(zTic));
+% zTic = tic;
+% fprintf('computing logZ (MT)... ');
+% fprintf('(%fs)\n', toc(zTic));
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (MT) on image %d... ', i);  
