@@ -39,12 +39,22 @@ hamming3 = zeros(length(foundTestObjectsList), 1);
 % zTic = tic;
 % fprintf('computing logZ (MT)... ');
 % fprintf('(%fs)\n', toc(zTic));
+scenes = keys(testScenes);
+nScenes = length(scenes);
+sceneIdxMap = containers.Map;
+for s=1:nScenes
+    sceneIdxMap(scenes{s}) = s;
+end
+CM3 = zeros(nScenes,nScenes);
+
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (MT) on image %d... ', i);  
-    [probs, scenes, bestScene, idx] = InferenceMT(foundTestObjectsList{i}, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K);
-    bestScenes3{i} = bestScene{1};
+    [probs3, scenes3, bestScene3, idx] = InferenceMT(foundTestObjectsList{i}, objectsVocab, edgeStructsMT, nodePotsMT, edgePotsMT, mCoeffsMT, K);
+    CM3(sceneIdxMap(testSceneList{i}),idx) = CM3(sceneIdxMap(testSceneList{i}),idx) + 1; 
+    bestScenes3{i} = bestScene3{1};
     hamming3(i) = strcmp(bestScenes3{i}, testSceneList{i});
     fprintf('correct=%d (%fs)\n', hamming3(i), toc(testTic));
 end
 fprintf('accuracy (MT)=%f\n', sum(hamming3)/numel(hamming3));
+disp(CM3);
