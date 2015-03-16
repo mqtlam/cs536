@@ -49,7 +49,7 @@ for s=1:nScenes
     sceneIdxMap(scenes{s}) = s;
 end
 CM3 = zeros(nScenes,nScenes);
-
+MT_prob = {};
 for i = 1:length(foundTestObjectsList)
     testTic = tic;
     fprintf('testing (MT) on image %d... ', i);  
@@ -57,6 +57,7 @@ for i = 1:length(foundTestObjectsList)
     CM3(sceneIdxMap(testSceneList{i}),idx) = CM3(sceneIdxMap(testSceneList{i}),idx) + 1; 
     bestScenes3{i} = bestScene3{1};
     hamming3(i) = strcmp(bestScenes3{i}, testSceneList{i});
+    MT_prob{i} = probs3;
     fprintf('correct=%d (%fs)\n', hamming3(i), toc(testTic));
 end
 fprintf('accuracy (MT)=%f\n', sum(hamming3)/numel(hamming3));
